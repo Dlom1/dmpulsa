@@ -10,6 +10,22 @@
       margin-bottom: 5px;
       border-radius: 5px;
     }
+        body {
+            font-size: 95px; /* Ukuran default teks */
+            line-height: 1.6; /* Tinggi baris untuk memperjelas bacaan */
+            max-width: 95%; /* Lebar maksimum konten */
+            margin: 0 auto; /* Pusatkan konten di tengah */
+            padding: 10px; /* Ruang antara konten dan tepi layar */
+            font-family: Arial, sans-serif; /* Ganti jenis font jika diperlukan */
+        }
+
+        /* Gaya untuk perangkat layar berukuran kecil */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px; /* Ukuran teks lebih kecil untuk perangkat kecil */
+                line-height: 1.5; /* Tinggi baris lebih sedikit untuk perangkat kecil */
+            }
+        }
 
 /* Style untuk warna latar belakang*/
 body { background: linear-gradient(to bottom, #195A9E, #2E969F); margin: 0; height: 100vh; }
