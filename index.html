@@ -1,0 +1,3547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+
+
+<meta charset="utf-8">
+    
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+
+<title>DM PULSA: Sedia Pulsa, Data, dan Token Listrik</title>
+ <style>
+        }
+    /* Style untuk menghapus Cek dan Beli. Untuk no. 5 adalah urutan yg dihapus*/
+    th:nth-child(5),
+    td:nth-child(5) {
+        display: nane;
+    }
+    /* Reset gaya default untuk memastikan tampilan rapi */
+    body, div {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* Membuat bingkai bulat kategori admin*/
+    .photo-frame {
+      border-radius: 50%;
+      overflow: hidden;
+      display: inline-block;
+      margin: 20px;
+      text-align: center;
+    }
+
+    /* Mengatur ukuran gambar secara responsif*/
+    .photo-frame img {
+      width: 99%;
+      height: auto;
+    }
+    /* Style untuk modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      border-radius: 10px;
+      max-width: 300px;
+      margin: 150px auto;
+      padding: 20px;
+      position: relative;
+    }
+/* CSS untuk tampilan admin PAS WAKTU BELI ATAU CEKAUOTH*/
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* tulisan nomor 2 adalah barisan fotonya*/
+  gap: 20px;
+}
+
+.admin-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-info img {
+  width: 80%; /* Ukuran gambar diatur menjadi 10% dari lebar kotaknya */
+  height: auto; /* Menyesuaikan tinggi gambar secara proporsional */
+}
+
+.admin-details {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.admin-details h5 {
+  margin: 0;
+}
+
+.admin-details button {
+  margin-top: 1px;
+}
+/* Add any other styles as needed */
+
+    /* Style untuk modas */
+    .modas {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .modas-content {
+      background-color: #fff;
+      border-radius: 10px;
+      max-width: 300px;
+      margin: 150px auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    .admin-info {
+      text-align: center;
+    }
+
+    .admin-info img {
+      max-width: 100px;
+      border-radius: 50%;
+    }
+
+    .admin-info h2 {
+      margin-bottom: 10px;
+    }
+
+    .close {
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 20px;
+    }
+
+  @media only screen and (max-width: 600px) {
+    /* Ketika layar berukuran 600px atau kurang (perangkat seluler) */
+    .accordion-btn {
+      padding: 20px 90px; /* Tetapkan padding atas/bawah tetap 20px, dan kiri/kanan menjadi 90px */
+      width: 90%; /* Lebar elemen akan menjadi 90% dari lebar layar */
+      margin-bottom: 10px; /* Tetapkan margin-bottom tetap 10px */
+      border-radius: 5px; /* Tetapkan border-radius tetap 5px */
+    }
+  }
+
+  @media only screen and (min-width: 601px) {
+    /* Ketika layar berukuran lebih dari 600px (desktop atau perangkat yang lebih besar) */
+    .accordion-btn {
+      padding: 20px 90px; /* Tetapkan padding atas/bawah tetap 20px, dan kiri/kanan menjadi 90px */
+      width: auto; /* Lebar elemen akan disesuaikan sesuai dengan kontennya (otomatis) */
+      margin-bottom: 10px; /* Tetapkan margin-bottom tetap 10px */
+      border-radius: 5px; /* Tetapkan border-radius tetap 5px */
+    }
+  }
+
+ /* Gaya JUDUL MENU untuk garis-garis */
+        .menu-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .line {
+            flex: 5;
+            height: 10px;
+            background-color: black;
+            margin: 0 10px;
+        }
+       /* Tambahkan gaya CSS untuk mengatur tampilan tab */
+    .tab {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Baris vertikal 3 */
+        grid-template-rows: repeat(2, 1fr);    /* Baris horizontal 2 */
+        grid-gap: 5px;
+    }
+
+    .tab img {
+        width: 10%;
+        height: 10%;
+        cursor: pointer;
+        opacity: 0.6;
+    }
+
+    .tab img.active {
+        opacity: 1;
+    }
+
+
+    /* Style untuk konten tab */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      background-color: #FFFFFF00;
+    }
+
+    /* Style untuk tabel */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+        th, td {
+            padding: 1px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+  .button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #7FFF00;
+    color: #000000;
+    text-decoration: #000000;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td:last-child {
+            border-right: none;
+        }
+/* Style untuk tab */
+    .accordion {
+      background-color: #f1f1f1;
+      margin-bottom: 1px;
+      border-radius: 1px;
+    }
+
+    /* Style untuk judul tab */
+    .accordion button {
+      background-color: inherit;
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 17px 20px;
+      transition: 0.3s;
+      font-size: 17px;
+      border-radius: 5px;
+    }
+
+    /* Style untuk konten tab */
+    .panel {
+      display: none;
+      padding: 1px 1px;
+      border-radius: 5px;
+      background-color: white;
+    }
+
+    .panel table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .panel th,
+    .panel td {
+      padding: 3px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+
+    .panel tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .panel th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .panel td:last-child {
+      border-right: none;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #7FFF00;
+      color: #000000;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #92FF68;
+    }
+
+</style>
+
+<!-- 
+Journey Template 
+http://www.templatemo.com/tm-511-journey
+-->
+    <!-- load stylesheets -->
+    
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+
+  <!-- Google web font "Open Sans" -->
+    
+<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+                <!-- Font Awesome -->
+    
+
+
+
+
+
+
+<link rel="stylesheet" href="css/bootstrap.min.css">                                      
+
+<!-- Bootstrap style -->
+    
+
+<link rel="stylesheet" type="text/css" href="css/datepicker.css"/>
+   
+<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+    
+
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    
+
+<link rel="stylesheet" href="css/templatemo-style.css">                                   
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Templatemo style -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+              
+
+
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+              
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+          <![endif]-->
+      </head>
+
+      
+<body>
+        <div class="tm-main-content" id="top">
+            <div class="tm-top-bar-bg"></div>    
+            <div class="tm-top-bar" id="tm-top-bar">
+                <div class="container">
+                    <div class="row">
+                        <nav class="navbar navbar-expand-lg narbar-light">
+                            <a class="navbar-brand mr-auto" href="#">
+                                <img src="img/logo.png" alt="Site logo">
+                                dm pulsa
+                            </a>
+
+
+
+
+
+
+                            <button type="button" id="nav-toggle" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div id="mainNav" class="collapse navbar-collapse tm-bg-white">
+                                <ul class="navbar-nav ml-auto">
+                                  <li class="nav-item">
+                                    <a class="nav-link active" href="#top">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#tm-section-2">Tentang DM pulsa</a>
+                                </li>
+
+<li class="nav-item">
+<a class="nav-link" href="#tm-section-3">Kontak Admin</a></li>
+                                
+
+
+
+
+                            </ul>
+                        </div>                            
+                    </nav>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- .tm-top-bar -->
+
+<!----------------------------------JUDUL------------------------------------>
+<!----------------------------------JUDUL------------------------------------>
+<!----------------------------------JUDUL------------------------------------>
+<!----------------------------------JUDUL------------------------------------>
+<!----------------------------------JUDUL------------------------------------>
+<!----------------------------------JUDUL------------------------------------>
+
+
+<center><div style="background-color: #1a1a1a; color: #69C6BB; font-family: 'Arial', sans-serif; text-align: center; margin-top: 70px; margin-bottom: 10px; padding: 5px; border: 5px solid #69C6BB; display: inline-block;">
+
+<body><img src="img/ahlan.png" width="100%"> </body>
+
+<h1 style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin: 10px 0;">Selamat Datang</h1>
+
+
+<b><p style="color: #69C6BB;">Nikmati Layanan Paket Data dan Pulsa Terpercaya dengan Harga Terjangkau di DM Pulsa</b></p> 
+</div></center>
+
+
+
+</body>
+</div>
+<!------------------------------Mulai bolo------------------------------------>
+<!------------------------------Mulai bolo------------------------------------>
+<!------------------------------Mulai bolo------------------------------------>
+<!------------------------------Mulai bolo------------------------------------>
+<!------------------------------Mulai bolo------------------------------------>
+<!------------------------------Mulai bolo------------------------------------>
+
+
+
+<!---------------------------------Menu---------------------------------------->
+<!---------------------------------Menu---------------------------------------->
+<!---------------------------------Menu---------------------------------------->
+<!---------------------------------Menu---------------------------------------->
+<!---------------------------------Menu---------------------------------------->
+<!---------------------------------Menu---------------------------------------->
+<!---------------------------------Menu---------------------------------------->
+<!---------------------------------Menu---------------------------------------->
+<!---------------------------------Menu---------------------------------------->
+<!---------------------------------Menu---------------------------------------->
+
+<h2 class="menu-title">
+        <span class="line"></span>
+        MENU
+        <span class="line"></span>
+    </h2>
+
+
+
+<center>
+  <div class="accordion-btn" style="background-color: #FFFFFF; color: #000000; font-family: 'Cambria', serif; text-center: left; padding: 10px 10px; border: none; border-radius: 5px;">
+
+
+
+
+ <img src="1telkomsel.png" alt="Gambar 1" width="30%" class="tablinks" onclick="openTab(event, 'telkomsel')">
+
+ <img src="2axis.png" alt="Gambar 2" width="30%" class="tablinks" onclick="openTab(event, 'axis')">
+
+ <img src="3xl.png" alt="Gambar 3" width="30%" class="tablinks" onclick="openTab(event, 'xl')">
+
+ <img src="4theree.png" alt="Gambar 4" width="30%" class="tablinks" onclick="openTab(event, 'three')">
+
+ <img src="5indosat.png" alt="Gambar 5" width="30%" class="tablinks" onclick="openTab(event, 'indosat')">
+
+ <img src="6pulsa.png" alt="Gambar 6" width="30%" class="tablinks" onclick="openTab(event, 'plsa')">
+
+ <img src="7tokenpln.png" alt="Gambar 7" width="30%" class="tablinks" onclick="openTab(event, 'tokenpln')">
+
+
+</center>
+
+</body>
+
+
+
+
+<!---------------------------Isi Tab & Konten------------------------------>
+<!---------------------------Isi Tab & Konten------------------------------>
+<!---------------------------Isi Tab & Konten------------------------------>
+<!---------------------------Isi Tab & Konten------------------------------>
+<!---------------------------Isi Tab & Konten------------------------------>
+<!---------------------------Isi Tab & Konten------------------------------>
+<!---------------------------Isi Tab & Konten------------------------------>
+<!---------------------------Isi Tab & Konten------------------------------>
+
+
+<div id="telkomsel" class="tabcontent">
+
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'flash')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">TELKOMSEL PAKET FLASH</button>
+
+<div class="panel" id="flash" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+
+<table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>1.</td>
+    <td>500MB</td>
+    <td>7 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash', '1', '500MB', '7 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>1GB</td>
+    <td>30 Hari</td>
+    <td>18.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash', '2', '1GB', '30 Hari', '18.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>2GB</td>
+    <td>30 Hari</td>
+    <td>30.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash', '3', '2GB', '30 Hari', '30.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>3GB</td>
+    <td>30 Hari</td>
+    <td>38.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash', '4', '3GB', '30 Hari', '38.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>5.</td>
+    <td>5GB</td>
+    <td>30 Hari</td>
+    <td>45.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash', '5', '5GB', '30 Hari', '45.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>8GB</td>
+    <td>30 Hari</td>
+    <td>65.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash', '6', '8GB', '30 Hari', '65.000')">Beli</a></td>
+  </tr>
+</table>
+
+
+    </div>
+  </div>
+
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'malam')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">TELKOMSEL PAKET MALAM</button>
+
+<div class="panel" id="malam" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>7.</td>
+    <td>1GB</td>
+    <td>2 Hari (00-07)</td>
+    <td>5.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Malam', '7', '1GB', '2 Hari (00-07)', '5.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>8.</td>
+    <td>5GB</td>
+    <td>2 Hari (00-07)</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Malam', '8', '5GB', '2 Hari (00-07)', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>9.</td>
+    <td>5GB</td>
+    <td>8 Hari (00-07)</td>
+    <td>15.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Malam', '9', '5GB', '8 Hari (00-07)', '15.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>10.</td>
+    <td>10GB</td>
+    <td>8 Hari (00-07)</td>
+    <td>18.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Malam', '10', '10GB', '8 Hari (00-07)', '18.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>11.</td>
+    <td>5GB</td>
+    <td>31 Hari (00-07)</td>
+    <td>23.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Malam', '11', '5GB', '31 Hari (00-07)', '23.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>12.</td>
+    <td>15GB</td>
+    <td>31 Hari (00-07)</td>
+    <td>30.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Malam', '12', '15GB', '31 Hari (00-07)', '30.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'gift')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">TELKOMSEL PAKET MAX GIFT</button>
+
+<div class="panel" id="gift" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+     <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>13.</td>
+    <td>LITE 3GB (0.5GB REG + 2GB LOCAL + 0.5GB YOUTUBE)</td>
+    <td>30 Hari</td>
+    <td>14.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '13', 'LITE 3GB (0.5GB REG + 2GB LOCAL + 0.5GB YOUTUBE)', '30 Hari', '14.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>14.</td>
+    <td>PRIME 4GB (0.5 REG + 2.5 LOCAL + 1GB NONTON)</td>
+    <td>30 Hari</td>
+    <td>19.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '14', 'PRIME 4GB (0.5 REG + 2.5 LOCAL + 1GB NONTON)', '30 Hari', '19.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>15.</td>
+    <td>4.5GB (1GB REG + 3GB LOKAL + 0.5GB APPS)</td>
+    <td>30 Hari</td>
+    <td>40.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '15', '4.5GB (1GB REG + 3GB LOKAL + 0.5GB APPS)', '30 Hari', '40.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>16.</td>
+    <td>8GB (0.5GB REG + 5.5GB LOCAL + 2GB CHAT)</td>
+    <td>30 Hari</td>
+    <td>30.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '16', '8GB (0.5GB REG + 5.5GB LOCAL + 2GB CHAT)', '30 Hari', '30.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>17.</td>
+    <td>10GB (2GB REG + 6GB LOCAL + 2GB APPS)</td>
+    <td>30 Hari</td>
+    <td>73.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '17', '10GB (2GB REG + 6GB LOCAL + 2GB APPS)', '30 Hari', '73.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>18.</td>
+    <td>14GB (1GB REG + 10GB LOCAL + 3GB SOSMED)</td>
+    <td>30 Hari</td>
+    <td>40.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '18', '14GB (1GB REG + 10GB LOCAL + 3GB SOSMED)', '30 Hari', '40.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>19.</td>
+    <td>24GB (1.5GB REG + 14.5GB LOCAL + 8GB SOSMED)</td>
+    <td>30 Hari</td>
+    <td>63.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '19', '24GB (1.5GB REG + 14.5GB LOCAL + 8GB SOSMED)', '30 Hari', '63.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>20.</td>
+    <td>35GB (2GB REG + 23GB LOCAL + 10GB NONTON)</td>
+    <td>30 Hari</td>
+    <td>78.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '20', '35GB (2GB REG + 23GB LOCAL + 10GB NONTON)', '30 Hari', '78.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>21.</td>
+    <td>40GB (2GB REG + 28GB LOCAL + 10GB NONTON)</td>
+    <td>30 Hari</td>
+    <td>80.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '21', '40GB (2GB REG + 28GB LOCAL + 10GB NONTON)', '30 Hari', '80.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>22.</td>
+    <td>58GB (3GB REG + 42GB LOCAL + 13GB NONTON)</td>
+    <td>30 Hari</td>
+    <td>110.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '22', '58GB (3GB REG + 42GB LOCAL + 13GB NONTON)', '30 Hari', '110.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>23.</td>
+    <td>70GB (5GB REG + 50GB LOCAL + 15GB NONTON)</td>
+    <td>30 Hari</td>
+    <td>130.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Max Gift', '23', '70GB (5GB REG + 50GB LOCAL + 15GB NONTON)', '30 Hari', '130.000')">Beli</a></td>
+  </tr>
+</table>
+
+
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'tsel-mini')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">TELKOMSEL PAKET MINI</button>
+
+<div class="panel" id="tsel-mini" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>24.</td>
+    <td>500MB</td>
+    <td>3 Hari</td>
+    <td>13.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '24', '500MB', '3 Hari', '13.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>25.</td>
+    <td>3.5GB</td>
+    <td>1 Hari</td>
+    <td>19.500</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '25', '3.5GB', '1 Hari', '19.500')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>26.</td>
+    <td>1.5GB</td>
+    <td>3 Hari</td>
+    <td>22.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '26', '1.5GB', '3 Hari', '22.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>27.</td>
+    <td>5GB</td>
+    <td>1 Hari</td>
+    <td>23.500</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '27', '5GB', '1 Hari', '23.500')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>28.</td>
+    <td>2.5GB</td>
+    <td>3 Hari</td>
+    <td>30.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '28', '2.5GB', '3 Hari', '30.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>29.</td>
+    <td>1.5GB</td>
+    <td>14 Hari</td>
+    <td>32.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '29', '1.5GB', '14 Hari', '32.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>30.</td>
+    <td>3.5GB</td>
+    <td>3 Hari</td>
+    <td>34.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '30', '3.5GB', '3 Hari', '34.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>31.</td>
+    <td>1.5GB</td>
+    <td>7 Hari</td>
+    <td>36.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '31', '1.5GB', '7 Hari', '36.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>32.</td>
+    <td>2GB</td>
+    <td>14 Hari</td>
+    <td>38.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '32', '2GB', '14 Hari', '38.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>33.</td>
+    <td>2.5GB</td>
+    <td>7 Hari</td>
+    <td>44.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '33', '2.5GB', '7 Hari', '44.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>34.</td>
+    <td>8GB</td>
+    <td>3 Hari</td>
+    <td>45.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '34', '8GB', '3 Hari', '45.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>35.</td>
+    <td>3.5GB</td>
+    <td>7 Hari</td>
+    <td>52.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '35', '3.5GB', '7 Hari', '52.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>36.</td>
+    <td>17GB</td>
+    <td>3 Hari</td>
+    <td>58.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '36', '17GB', '3 Hari', '58.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>37.</td>
+    <td>6GB</td>
+    <td>7 Hari</td>
+    <td>59.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '37', '6GB', '7 Hari', '59.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>38.</td>
+    <td>17GB</td>
+    <td>7 Hari</td>
+    <td>73.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Mini', '38', '17GB', '7 Hari', '73.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'tsel-harian-mingguan')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">TELKOMSEL PAKET Harian & Mingguan (24jam)</button>
+
+<div class="panel" id="tsel-harian-mingguan" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>39.</td>
+    <td>500MB</td>
+    <td>1 Hari</td>
+    <td>8.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '39', '500MB', '1 Hari', '8.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>40.</td>
+    <td>500MB</td>
+    <td>3 Hari</td>
+    <td>12.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '40', '500MB', '3 Hari', '12.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>41.</td>
+    <td>800MB</td>
+    <td>1 Hari</td>
+    <td>13.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '41', '800MB', '1 Hari', '13.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>42.</td>
+    <td>500MB</td>
+    <td>7 Hari</td>
+    <td>16.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '42', '500MB', '7 Hari', '16.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>43.</td>
+    <td>2GB</td>
+    <td>1 Hari</td>
+    <td>19.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '43', '2GB', '1 Hari', '19.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>44.</td>
+    <td>6GB</td>
+    <td>1 Hari</td>
+    <td>23.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '44', '6GB', '1 Hari', '23.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>45.</td>
+    <td>1GB</td>
+    <td>3 Hari</td>
+    <td>22.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '45', '1GB', '3 Hari', '22.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>46.</td>
+    <td>1GB</td>
+    <td>7 Hari</td>
+    <td>26.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '46', '1GB', '7 Hari', '26.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>47.</td>
+    <td>2GB</td>
+    <td>3 Hari</td>
+    <td>28.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '47', '2GB', '3 Hari', '28.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>48.</td>
+    <td>1,25GB</td>
+    <td>14 Hari</td>
+    <td>31.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '48', '1,25GB', '14 Hari', '31.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>49.</td>
+    <td>3GB</td>
+    <td>3 Hari</td>
+    <td>40.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '49', '3GB', '3 Hari', '40.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>50.</td>
+    <td>2GB</td>
+    <td>7 Hari</td>
+    <td>43.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '50', '2GB', '7 Hari', '43.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>51.</td>
+    <td>4GB</td>
+    <td>3 Hari</td>
+    <td>45.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '51', '4GB', '3 Hari', '45.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>52.</td>
+    <td>2GB</td>
+    <td>14 Hari</td>
+    <td>47.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '52', '2GB', '14 Hari', '47.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>53.</td>
+    <td>2,5GB</td>
+    <td>7 Hari</td>
+    <td>49.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '53', '2,5GB', '7 Hari', '49.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>54.</td>
+    <td>7GB</td>
+    <td>3 Hari</td>
+    <td>52.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '54', '7GB', '3 Hari', '52.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>55.</td>
+    <td>3,3GB</td>
+    <td>14 Hari</td>
+    <td>60.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '55', '3,3GB', '14 Hari', '60.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>56.</td>
+    <td>15GB</td>
+    <td>3 Hari</td>
+    <td>61.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '56', '15GB', '3 Hari', '61.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>57.</td>
+    <td>5GB</td>
+    <td>7 Hari</td>
+    <td>63.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '57', '5GB', '7 Hari', '63.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>58.</td>
+    <td>5GB</td>
+    <td>14 Hari</td>
+    <td>67.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '58', '5GB', '14 Hari', '67.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>59.</td>
+    <td>20GB</td>
+    <td>3 Hari</td>
+    <td>69.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '59', '20GB', '3 Hari', '69.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>60.</td>
+    <td>4GB</td>
+    <td>14 Hari</td>
+    <td>79.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '60', '4GB', '14 Hari', '79.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>61.</td>
+    <td>15GB</td>
+    <td>7 Hari</td>
+    <td>81.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Harian & Mingguan', '61', '15GB', '7 Hari', '81.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'flas-promo')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">TELKOMSEL PAKET Flash Promo</button>
+
+<div class="panel" id="flas-promo" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>62.</td>
+    <td>250MB</td>
+    <td>7 Hari</td>
+    <td>7.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash Promo', '62', '250MB', '7 Hari', '7.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>63.</td>
+    <td>500MB</td>
+    <td>7 Hari</td>
+    <td>9.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash Promo', '63', '500MB', '7 Hari', '9.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>64.</td>
+    <td>750MB</td>
+    <td>7 Hari</td>
+    <td>15.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash Promo', '64', '750MB', '7 Hari', '15.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>65.</td>
+    <td>1GB</td>
+    <td>30 Hari</td>
+    <td>16.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash Promo', '65', '1GB', '30 Hari', '16.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>66.</td>
+    <td>2GB</td>
+    <td>30 Hari</td>
+    <td>29.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash Promo', '66', '2GB', '30 Hari', '29.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>67.</td>
+    <td>3GB</td>
+    <td>30 Hari</td>
+    <td>37.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash Promo', '67', '3GB', '30 Hari', '37.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>68.</td>
+    <td>4GB</td>
+    <td>30 Hari</td>
+    <td>56.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash Promo', '68', '4GB', '30 Hari', '56.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>69.</td>
+    <td>5GB</td>
+    <td>30 Hari</td>
+    <td>57.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Flash Promo', '69', '5GB', '30 Hari', '57.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'reguler2')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">TELKOMSEL PAKET REGULER 2</button>
+
+<div class="panel" id="reguler2" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>70.</td>
+    <td>5GB</td>
+    <td>30 Hari</td>
+    <td>45.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Reguler 2', '70', '5GB', '30 Hari', '45.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>71.</td>
+    <td>10GB</td>
+    <td>30 Hari</td>
+    <td>80.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Reguler 2', '71', '10GB', '30 Hari', '80.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>72.</td>
+    <td>15GB</td>
+    <td>30 Hari</td>
+    <td>115.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Reguler 2', '72', '15GB', '30 Hari', '115.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>73.</td>
+    <td>25GB</td>
+    <td>30 Hari</td>
+    <td>133.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Reguler 2', '73', '25GB', '30 Hari', '133.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>74.</td>
+    <td>45GB</td>
+    <td>30 Hari</td>
+    <td>176.000</td>
+    <td><a href="#" class="button" onclick="showModal('Telkomsel', 'Paket Reguler 2', '74', '45GB', '30 Hari', '176.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+
+
+  <script>
+
+    // Function to toggle accordion panels
+    function toggleAccordion(event, panelId) {
+      var panel = document.getElementById(panelId);
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+      event.currentTarget.classList.toggle("active");
+    }
+  </script>
+</body>
+
+
+    </div>
+    <div id="axis" class="tabcontent">
+<body>
+
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'axis1')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">AXIS KUOTA HARIAN</button>
+
+<div class="panel" id="axis1" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>1.</td>
+    <td>1GB</td>
+    <td>1 Hari</td>
+    <td>5.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '1', '1GB', '1 Hari', '5.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>500MB</td>
+    <td>3 Hari</td>
+    <td>7.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '2', '500MB', '3 Hari', '7.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>1.5GB</td>
+    <td>3 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '3', '1.5GB', '3 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>5GB</td>
+    <td>3 Hari</td>
+    <td>14.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '4', '5GB', '3 Hari', '14.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>5.</td>
+    <td>1.5GB</td>
+    <td>5 Hari</td>
+    <td>11.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '5', '1.5GB', '5 Hari', '11.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>2GB</td>
+    <td>5 Hari</td>
+    <td>14.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '6', '2GB', '5 Hari', '14.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>7.</td>
+    <td>4GB</td>
+    <td>5 Hari</td>
+    <td>17.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '7', '4GB', '5 Hari', '17.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>8.</td>
+    <td>7GB</td>
+    <td>5 Hari</td>
+    <td>21.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '8', '7GB', '5 Hari', '21.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>9.</td>
+    <td>2.5GB</td>
+    <td>7 Hari</td>
+    <td>18.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '9', '2.5GB', '7 Hari', '18.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>10.</td>
+    <td>3GB</td>
+    <td>7 Hari</td>
+    <td>20.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '10', '3GB', '7 Hari', '20.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>11.</td>
+    <td>4.5GB</td>
+    <td>7 Hari</td>
+    <td>22.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '11', '4.5GB', '7 Hari', '22.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>12.</td>
+    <td>10GB</td>
+    <td>7 Hari</td>
+    <td>33.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '12', '10GB', '7 Hari', '33.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>13.</td>
+    <td>3.5GB</td>
+    <td>15 Hari</td>
+    <td>21.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '13', '3.5GB', '15 Hari', '21.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>14.</td>
+    <td>7GB</td>
+    <td>15 Hari</td>
+    <td>33.500</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '14', '7GB', '15 Hari', '33.500')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>15.</td>
+    <td>20GB</td>
+    <td>15 Hari</td>
+    <td>57.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Kuota Harian', '15', '20GB', '15 Hari', '57.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'axis2')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">AXIS PAKET WARNET</button>
+
+<div class="panel" id="axis2" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>16.</td>
+    <td>800MB</td>
+    <td>1 Jam</td>
+    <td>2.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Warnet', '16', '800MB', '1 Jam', '2.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>17.</td>
+    <td>1,5GB</td>
+    <td>2 Jam</td>
+    <td>3.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Warnet', '17', '1,5GB', '2 Jam', '3.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>18.</td>
+    <td>3GB</td>
+    <td>3 Jam</td>
+    <td>4.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Warnet', '18', '3GB', '3 Jam', '4.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>19.</td>
+    <td>3GB</td>
+    <td>6 Jam</td>
+    <td>5.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Warnet', '19', '3GB', '6 Jam', '5.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'axis3')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">AXIS PAKET BRONET</button>
+
+<div class="panel" id="axis3" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>20.</td>
+    <td>1.5GB</td>
+    <td>30 Hari</td>
+    <td>15.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Bronet', '20', '1.5GB', '30 Hari', '15.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>21.</td>
+    <td>3GB</td>
+    <td>30 Hari</td>
+    <td>24.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Bronet', '21', '3GB', '30 Hari', '24.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>22.</td>
+    <td>5GB</td>
+    <td>30 Hari</td>
+    <td>32.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Bronet', '22', '5GB', '30 Hari', '32.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>23.</td>
+    <td>8GB</td>
+    <td>30 Hari</td>
+    <td>45.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Bronet', '23', '8GB', '30 Hari', '45.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>24.</td>
+    <td>12GB</td>
+    <td>30 Hari</td>
+    <td>58.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Bronet', '24', '12GB', '30 Hari', '58.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>25.</td>
+    <td>16GB</td>
+    <td>30 Hari</td>
+    <td>72.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Bronet', '25', '16GB', '30 Hari', '72.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>26.</td>
+    <td>20GB</td>
+    <td>30 Hari</td>
+    <td>74.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Bronet', '26', '20GB', '30 Hari', '74.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>27.</td>
+    <td>25GB</td>
+    <td>60 Hari</td>
+    <td>87.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Bronet', '27', '25GB', '60 Hari', '87.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>28.</td>
+    <td>50GB</td>
+    <td>60 Hari</td>
+    <td>135.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Bronet', '28', '50GB', '60 Hari', '135.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'axis4')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">AXIS PAKET OWSEM</button>
+
+<div class="panel" id="axis4" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>29.</td>
+    <td>(2GB) + 2GB Games</td>
+    <td>30 Hari</td>
+    <td>18.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Owsem', '29', '(2GB) + 2GB Games', '30 Hari', '18.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>30.</td>
+    <td>(4GB) + 4GB Games</td>
+    <td>30 Hari</td>
+    <td>29.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Owsem', '30', '(4GB) + 4GB Games', '30 Hari', '29.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>31.</td>
+    <td>(3GB) + 6GB Musik + 9GB Mlm + 6GB Medsos + UnliGame</td>
+    <td>30 Hari</td>
+    <td>42.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Owsem', '31', '(3GB) + 6GB Musik + 9GB Mlm + 6GB Medsos + UnliGame', '30 Hari', '42.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>32.</td>
+    <td>(8GB) + 8GB Games</td>
+    <td>30 Hari</td>
+    <td>46.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Owsem', '32', '(8GB) + 8GB Games', '30 Hari', '46.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>33.</td>
+    <td>(4GB) + 8GB Musik + 12GB Mlm + 8GB Medsos + UnliGame</td>
+    <td>30 Hari</td>
+    <td>48.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Owsem', '33', '(4GB) + 8GB Musik + 12GB Mlm + 8GB Medsos + UnliGame', '30 Hari', '48.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>34.</td>
+    <td>(6GB) + 12GB Musik + 18GB Mlm + 12GB Medsos + UnliGame</td>
+    <td>30 Hari</td>
+    <td>60.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Owsem', '34', '(6GB) + 12GB Musik + 18GB Mlm + 12GB Medsos + UnliGame', '30 Hari', '60.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>35.</td>
+    <td>(12GB) + 12GB Games</td>
+    <td>30 Hari</td>
+    <td>60.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Owsem', '35', '(12GB) + 12GB Games', '30 Hari', '60.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'axis5')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">AXIS PAKET SOSMED / YOUTUBE</button>
+
+<div class="panel" id="axis5" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>36.</td>
+    <td>1GB Sosmed</td>
+    <td>30 Hari</td>
+    <td>6.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Spesial Sosial Media', '36', '1GB Sosmed', '30 Hari', '6.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>37.</td>
+    <td>2GB Sosmed</td>
+    <td>30 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Spesial Sosial Media', '37', '2GB Sosmed', '30 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>38.</td>
+    <td>1GB Youtube</td>
+    <td>30 Hari</td>
+    <td>6.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Youtube', '38', '1GB Youtube', '30 Hari', '6.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>39.</td>
+    <td>2GB Youtube</td>
+    <td>30 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Youtube', '39', '2GB Youtube', '30 Hari', '10.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+
+
+  <script>
+    // Function to toggle accordion panels
+    function toggleAccordion(event, panelId) {
+      var panel = document.getElementById(panelId);
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+      event.currentTarget.classList.toggle("active");
+    }
+  </script>
+</body>
+
+
+    </div>
+
+    <div id="xl" class="tabcontent">
+
+<body>
+
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'xl1')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">XL PAKET PURE</button>
+
+<div class="panel" id="xl1" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>1.</td>
+    <td>500MB</td>
+    <td>30 Hari</td>
+    <td>5.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Harian (30 Hari)', '1', '500MB', '30 Hari', '5.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>1GB</td>
+    <td>30 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Harian (30 Hari)', '2', '1GB', '30 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>2GB</td>
+    <td>30 Hari</td>
+    <td>18.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Harian (30 Hari)', '3', '2GB', '30 Hari', '18.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>3GB</td>
+    <td>30 Hari</td>
+    <td>25.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Harian (30 Hari)', '4', '3GB', '30 Hari', '25.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>5.</td>
+    <td>4GB</td>
+    <td>30 Hari</td>
+    <td>32.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Harian (30 Hari)', '5', '4GB', '30 Hari', '32.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>5GB</td>
+    <td>30 Hari</td>
+    <td>43.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket Harian (30 Hari)', '6', '5GB', '30 Hari', '43.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'xl2')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">XL PAKET EXTRA COMBO FLEX</button>
+
+<div class="panel" id="xl2" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>7.</td>
+    <td>1,5GB All + (0,5GB - 2,5GB Lokal) + Unlimited Chat</td>
+    <td>30 Hari</td>
+    <td>17.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket AXIS PAKET OWSEM', '7', '1,5GB All + (0,5GB - 2,5GB Lokal) + Unlimited Chat', '30 Hari', '17.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>8.</td>
+    <td>3GB All + (0,5GB - 4,5GB Lokal) + Unlimited Chat</td>
+    <td>30 Hari</td>
+    <td>27.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket AXIS PAKET OWSEM', '8', '3GB All + (0,5GB - 4,5GB Lokal) + Unlimited Chat', '30 Hari', '27.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>9.</td>
+    <td>4GB All + (1GB - 9GB Lokal) + Unlimited Chat</td>
+    <td>30 Hari</td>
+    <td>36.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket AXIS PAKET OWSEM', '9', '4GB All + (1GB - 9GB Lokal) + Unlimited Chat', '30 Hari', '36.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>10.</td>
+    <td>9GB All + (1GB - 16GB Lokal) + Unlimited Chat</td>
+    <td>30 Hari</td>
+    <td>54.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket AXIS PAKET OWSEM', '10', '9GB All + (1GB - 16GB Lokal) + Unlimited Chat', '30 Hari', '54.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>11.</td>
+    <td>15GB All + (4GB - 30GB Lokal) + Unlimited Chat</td>
+    <td>30 Hari</td>
+    <td>76.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket AXIS PAKET OWSEM', '11', '15GB All + (4GB - 30GB Lokal) + Unlimited Chat', '30 Hari', '76.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>12.</td>
+    <td>26GB All + (3GB - 46GB Lokal) + Unlimited Chat</td>
+    <td>30 Hari</td>
+    <td>104.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket AXIS PAKET OWSEM', '12', '26GB All + (3GB - 46GB Lokal) + Unlimited Chat', '30 Hari', '104.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>13.</td>
+    <td>36GB All + (4GB - 54GB Lokal) + Unlimited Chat</td>
+    <td>30 Hari</td>
+    <td>124.000</td>
+    <td><a href="#" class="button" onclick="showModal('Axis', 'Paket AXIS PAKET OWSEM', '13', '36GB All + (4GB - 54GB Lokal) + Unlimited Chat', '30 Hari', '124.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'xl3')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">XL PAKET EXTRA COMBO</button>
+
+<div class="panel" id="xl3" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>14.</td>
+    <td>5GB + 10GB Youtube</td>
+    <td>30 Hari</td>
+    <td>54.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET EXTRA COMBO', '14', '5GB + 10GB Youtube', '30 Hari', '54.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>15.</td>
+    <td>10GB + 20GB Youtube</td>
+    <td>30 Hari</td>
+    <td>78.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET EXTRA COMBO', '15', '10GB + 20GB Youtube', '30 Hari', '78.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>16.</td>
+    <td>15GB + 30GB Youtube</td>
+    <td>30 Hari</td>
+    <td>115.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET EXTRA COMBO', '16', '15GB + 30GB Youtube', '30 Hari', '115.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>17.</td>
+    <td>20GB + 40GB Youtube</td>
+    <td>30 Hari</td>
+    <td>164.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET EXTRA COMBO', '17', '20GB + 40GB Youtube', '30 Hari', '164.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>18.</td>
+    <td>35GB + 70GB Youtube</td>
+    <td>30 Hari</td>
+    <td>220.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET EXTRA COMBO', '18', '35GB + 70GB Youtube', '30 Hari', '220.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'xl4')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">XL PAKET BLUE</button>
+
+<div class="panel" id="xl4" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>19.</td>
+    <td>1GB</td>
+    <td>2 Hari</td>
+    <td>6.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET BLUE', '19', '1GB', '2 Hari', '6.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>20.</td>
+    <td>3GB</td>
+    <td>2 Hari</td>
+    <td>11.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET BLUE', '20', '3GB', '2 Hari', '11.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'xl5')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">XL PAKET EXTRA ON</button>
+
+<div class="panel" id="xl5" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+     <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>21.</td>
+    <td>1GB</td>
+    <td>60 Hari</td>
+    <td>16.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET EXTRA ON', '21', '1GB', '60 Hari', '16.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>22.</td>
+    <td>2GB</td>
+    <td>60 Hari</td>
+    <td>26.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET EXTRA ON', '22', '2GB', '60 Hari', '26.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'xl6')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">XL PAKET AKRAB</button>
+
+<div class="panel" id="xl6" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>23.</td>
+    <td>10GB</td>
+    <td>30 Hari</td>
+    <td>60.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET AKRAB', '23', '10GB', '30 Hari', '60.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>24.</td>
+    <td>25GB</td>
+    <td>30 Hari</td>
+    <td>120.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET AKRAB', '24', '25GB', '30 Hari', '120.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'xl7')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">XL PAKET EXTRA COMBO PROMO</button>
+
+<div class="panel" id="xl7" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>25.</td>
+    <td>5GB + 5GB</td>
+    <td>30 Hari</td>
+    <td>57.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET EXTRA COMBO PROMO', '25', '5GB + 5GB', '30 Hari', '57.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>26.</td>
+    <td>10GB + 10GB</td>
+    <td>30 Hari</td>
+    <td>85.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET EXTRA COMBO PROMO', '26', '10GB + 10GB', '30 Hari', '85.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>27.</td>
+    <td>15GB + 15GB</td>
+    <td>30 Hari</td>
+    <td>117.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PAKET EXTRA COMBO PROMO', '27', '15GB + 15GB', '30 Hari', '117.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+
+
+  <script>
+    // Function to toggle accordion panels
+    function toggleAccordion(event, panelId) {
+      var panel = document.getElementById(panelId);
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+      event.currentTarget.classList.toggle("active");
+    }
+  </script>
+</body>
+
+
+</div>
+
+    <div id="three" class="tabcontent">
+
+<body>
+
+
+
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, '31')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">THREE PAKET PURE & JUMBO</button>
+
+<div class="panel" id="31" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>1.</td>
+    <td>1GB</td>
+    <td>30 Hari</td>
+    <td>8.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET PURE & JUMBO', '1', '1GB', '30 Hari', '8.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>1.5GB</td>
+    <td>14 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET PURE & JUMBO', '2', '1.5GB', '14 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>2GB</td>
+    <td>30 Hari</td>
+    <td>15.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET PURE & JUMBO', '3', '2GB', '30 Hari', '15.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>2.5GB</td>
+    <td>14 Hari</td>
+    <td>17.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET PURE & JUMBO', '4', '2.5GB', '14 Hari', '17.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>5.</td>
+    <td>4GB</td>
+    <td>14 Hari</td>
+    <td>28.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET PURE & JUMBO', '5', '4GB', '14 Hari', '28.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>5GB</td>
+    <td>30 Hari</td>
+    <td>32.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET PURE & JUMBO', '6', '5GB', '30 Hari', '32.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>7.</td>
+    <td>10GB</td>
+    <td>30 Hari</td>
+    <td>50.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET PURE & JUMBO', '7', '10GB', '30 Hari', '50.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>8.</td>
+    <td>15GB</td>
+    <td>30 Hari</td>
+    <td>57.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET PURE & JUMBO', '8', '15GB', '30 Hari', '57.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>9.</td>
+    <td>20GB</td>
+    <td>30 Hari</td>
+    <td>70.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET PURE & JUMBO', '9', '20GB', '30 Hari', '70.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, '32')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">THREE PAKET HAPPY MINI</button>
+
+<div class="panel" id="32" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>10.</td>
+    <td>1.5GB (1)</td>
+    <td>1 Hari</td>
+    <td>4.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '10', '1.5GB (1)', '1 Hari', '4.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>11.</td>
+    <td>1.5GB (2)</td>
+    <td>1 Hari</td>
+    <td>4.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '11', '1.5GB (2)', '1 Hari', '4.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>12.</td>
+    <td>2.5GB</td>
+    <td>1 Hari</td>
+    <td>6.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '12', '2.5GB', '1 Hari', '6.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>13.</td>
+    <td>1GB</td>
+    <td>3 Hari</td>
+    <td>7.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '13', '1GB', '3 Hari', '7.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>14.</td>
+    <td>1.5GB</td>
+    <td>7 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '14', '1.5GB', '7 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>15.</td>
+    <td>5GB</td>
+    <td>1 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '15', '5GB', '1 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>16.</td>
+    <td>3GB</td>
+    <td>3 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '16', '3GB', '3 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>17.</td>
+    <td>2GB</td>
+    <td>5 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '17', '2GB', '5 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>18.</td>
+    <td>5GB</td>
+    <td>3 Hari</td>
+    <td>14.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '18', '5GB', '3 Hari', '14.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>19.</td>
+    <td>2GB</td>
+    <td>7 Hari</td>
+    <td>14.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '19', '2GB', '7 Hari', '14.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>20.</td>
+    <td>3.5GB</td>
+    <td>5 Hari</td>
+    <td>14.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET HAPPY MINI', '20', '3.5GB', '5 Hari', '14.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, '33')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">THREE PAKET AlwaysOn</button>
+
+<div class="panel" id="33" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+     <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>21.</td>
+    <td>Tri Masa Aktif</td>
+    <td>+120 Hari</td>
+    <td>5.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET AlwaysOn', '21', 'Tri Masa Aktif', '+120 Hari', '5.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>22.</td>
+    <td>2.5GB AON (AlwaysOn/Bisa digunakan selama kartu aktif)</td>
+    <td>Aktif selama kartu aktif</td>
+    <td>16.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET AlwaysOn', '22', '2.5GB AON (AlwaysOn/Bisa digunakan selama kartu aktif)', 'Aktif selama kartu aktif', '16.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>23.</td>
+    <td>3.5GB AON (AlwaysOn)</td>
+    <td>Aktif selama kartu aktif</td>
+    <td>20.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET AlwaysOn', '23', '3.5GB AON (AlwaysOn)', 'Aktif selama kartu aktif', '20.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>24.</td>
+    <td>6GB AON</td>
+    <td>Aktif selama kartu aktif</td>
+    <td>28.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET AlwaysOn', '24', '6GB AON', 'Aktif selama kartu aktif', '28.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>25.</td>
+    <td>9GB AON</td>
+    <td>Aktif selama kartu aktif</td>
+    <td>39.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET AlwaysOn', '25', '9GB AON', 'Aktif selama kartu aktif', '39.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>26.</td>
+    <td>12GB AON</td>
+    <td>Aktif selama kartu aktif</td>
+    <td>50.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET AlwaysOn', '26', '12GB AON', 'Aktif selama kartu aktif', '50.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>27.</td>
+    <td>22GB AON (+ 30GB Ytb/VIU/Netflix 30HR)</td>
+    <td>Aktif selama kartu aktif + 30 Hari</td>
+    <td>67.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET AlwaysOn', '27', '22GB AON (+ 30GB Ytb/VIU/Netflix 30HR)', 'Aktif selama kartu aktif + 30 Hari', '67.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>28.</td>
+    <td>6GB AON (+ 20GB 01-17 + Unli 30HR)</td>
+    <td>Aktif selama kartu aktif + 30 Hari</td>
+    <td>69.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET AlwaysOn', '28', '6GB AON (+ 20GB 01-17 + Unli 30HR)', 'Aktif selama kartu aktif + 30 Hari', '69.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>29.</td>
+    <td>40GB AON</td>
+    <td>Aktif selama kartu aktif</td>
+    <td>95.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET AlwaysOn', '29', '40GB AON', 'Aktif selama kartu aktif', '95.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, '34')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">THREE PAKET KOMPAK</button>
+
+<div class="panel" id="34" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>30.</td>
+    <td>3GB</td>
+    <td>7 Hari</td>
+    <td>20.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET KOMPAK', '30', '3GB', '7 Hari', '20.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>31.</td>
+    <td>7GB</td>
+    <td>14 Hari</td>
+    <td>39.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET KOMPAK', '31', '7GB', '14 Hari', '39.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>32.</td>
+    <td>15GB</td>
+    <td>30 Hari</td>
+    <td>57.000</td>
+    <td><a href="#" class="button" onclick="showModal('THREE', 'PAKET KOMPAK', '32', '15GB', '30 Hari', '57.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+
+
+  <script>
+    // Function to toggle accordion panels
+    function toggleAccordion(event, panelId) {
+      var panel = document.getElementById(panelId);
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+      event.currentTarget.classList.toggle("active");
+    }
+  </script>
+</body>
+
+</div>
+
+    <div id="indosat" class="tabcontent">
+
+<body>
+
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'indosat1')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">INDOSAT PAKET PURE & INTER</button>
+
+<div class="panel" id="indosat1" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>0.</td>
+    <td>500MB</td>
+    <td>7 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '0', '500MB', '7 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>1.</td>
+    <td>100MB</td>
+    <td>30 Hari</td>
+    <td>2.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '1', '100MB', '30 Hari', '2.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>250MB</td>
+    <td>30 Hari</td>
+    <td>3.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '2', '250MB', '30 Hari', '3.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>500MB</td>
+    <td>30 Hari</td>
+    <td>5.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '3', '500MB', '30 Hari', '5.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>750MB</td>
+    <td>30 Hari</td>
+    <td>7.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '4', '750MB', '30 Hari', '7.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>5.</td>
+    <td>1GB</td>
+    <td>30 Hari</td>
+    <td>10.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '5', '1GB', '30 Hari', '10.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>2GB</td>
+    <td>30 Hari</td>
+    <td>18.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '6', '2GB', '30 Hari', '18.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>3GB</td>
+    <td>30 Hari</td>
+    <td>25.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '6', '3GB', '30 Hari', '25.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>7.</td>
+    <td>5.5GB</td>
+    <td>30 Hari</td>
+    <td>28.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '7', '5.5GB', '30 Hari', '28.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>8.</td>
+    <td>9GB</td>
+    <td>30 Hari</td>
+    <td>38.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '8', '9GB', '30 Hari', '38.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>9.</td>
+    <td>16GB</td>
+    <td>30 Hari</td>
+    <td>57.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '9', '16GB', '30 Hari', '57.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>10.</td>
+    <td>25GB</td>
+    <td>30 Hari</td>
+    <td>79.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '10', '25GB', '30 Hari', '79.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>11.</td>
+    <td>42GB</td>
+    <td>30 Hari</td>
+    <td>100.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '11', '42GB', '30 Hari', '100.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>12.</td>
+    <td>8GB</td>
+    <td>30 Hari</td>
+    <td>65.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '12', '8GB', '30 Hari', '65.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>13.</td>
+    <td>9GB</td>
+    <td>30 Hari</td>
+    <td>74.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '13', '9GB', '30 Hari', '74.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>14.</td>
+    <td>10GB</td>
+    <td>30 Hari</td>
+    <td>82.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET PURE & INTER', '14', '10GB', '30 Hari', '82.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'indosat2')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">INDOSAT PAKET YELLOW</button>
+
+<div class="panel" id="indosat2" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>15.</td>
+    <td>1GB</td>
+    <td>1 Hari</td>
+    <td>5.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET YELLOW', '15', '1GB', '1 Hari', '5.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>16.</td>
+    <td>1GB</td>
+    <td>2 Hari</td>
+    <td>6.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET YELLOW', '16', '1GB', '2 Hari', '6.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>17.</td>
+    <td>1GB</td>
+    <td>7 Hari</td>
+    <td>9.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET YELLOW', '17', '1GB', '7 Hari', '9.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>18.</td>
+    <td>1GB</td>
+    <td>15 Hari</td>
+    <td>11.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET YELLOW', '18', '1GB', '15 Hari', '11.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'indosat3')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">INDOSAT PAKET FREEDOM UNLI</button>
+
+<div class="panel" id="indosat3" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>19.</td>
+    <td>1GB + 4.5GB Apps</td>
+    <td>30 Hari</td>
+    <td>28.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM UNLI', '19', '1GB + 4.5GB Apps', '30 Hari', '28.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>20.</td>
+    <td>2GB + 7.5GB Apps</td>
+    <td>30 Hari</td>
+    <td>44.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM UNLI', '20', '2GB + 7.5GB Apps', '30 Hari', '44.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>21.</td>
+    <td>3GB + 15GB Apps</td>
+    <td>30 Hari</td>
+    <td>66.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM UNLI', '21', '3GB + 15GB Apps', '30 Hari', '66.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>22.</td>
+    <td>7GB + 20GB Apps</td>
+    <td>30 Hari</td>
+    <td>76.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM UNLI', '22', '7GB + 20GB Apps', '30 Hari', '76.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>23.</td>
+    <td>10GB + 35GB Apps</td>
+    <td>30 Hari</td>
+    <td>100.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM UNLI', '23', '10GB + 35GB Apps', '30 Hari', '100.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'indosat4')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">INDOSAT PAKET FREEDOM COMBO</button>
+
+<div class="panel" id="indosat4" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>24.</td>
+    <td>4GB + 2GB Mlm</td>
+    <td>30 Hari</td>
+    <td>30.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM COMBO', '24', '4GB + 2GB Mlm', '30 Hari', '30.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>25.</td>
+    <td>7GB + 3GB Mlm</td>
+    <td>30 Hari</td>
+    <td>42.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM COMBO', '25', '7GB + 3GB Mlm', '30 Hari', '42.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>26.</td>
+    <td>15GB + 5GB Mlm</td>
+    <td>30 Hari</td>
+    <td>62.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM COMBO', '26', '15GB + 5GB Mlm', '30 Hari', '62.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>27.</td>
+    <td>23GB + 7GB Mlm</td>
+    <td>30 Hari</td>
+    <td>83.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM COMBO', '27', '23GB + 7GB Mlm', '30 Hari', '83.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'indosat5')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">INDOSAT PAKET FREEDOM NASIONAL</button>
+
+<div class="panel" id="indosat5" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>28.</td>
+    <td>2.5GB</td>
+    <td>5 Hari</td>
+    <td>13.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM NASIONAL', '28', '2.5GB', '5 Hari', '13.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>29.</td>
+    <td>5GB</td>
+    <td>3 Hari</td>
+    <td>17.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM NASIONAL', '29', '5GB', '3 Hari', '17.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>30.</td>
+    <td>7GB</td>
+    <td>5 Hari</td>
+    <td>22.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET FREEDOM NASIONAL', '30', '7GB', '5 Hari', '22.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'indosat6')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">INDOSAT PAKET HARIAN</button>
+
+<div class="panel" id="indosat6" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>31.</td>
+    <td>7GB</td>
+    <td>7 Hari</td>
+    <td>27.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET HARIAN', '31', '7GB', '7 Hari', '27.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>32.</td>
+    <td>14GB</td>
+    <td>14 Hari</td>
+    <td>48.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET HARIAN', '32', '14GB', '14 Hari', '48.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>33.</td>
+    <td>28GB</td>
+    <td>28 Hari</td>
+    <td>82.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET HARIAN', '33', '28GB', '28 Hari', '82.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'indosat7')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">INDOSAT PAKET YOUTUBE</button>
+
+<div class="panel" id="indosat7" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+     <table>
+  <tr>
+    <th>No.</th>
+    <th>Kuota</th>
+    <th>Durasi</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>34.</td>
+    <td>500MB + 1GB Ytb</td>
+    <td>2 Hari</td>
+    <td>8.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET YOUTUBE', '34', '500MB + 1GB Ytb', '2 Hari', '8.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>35.</td>
+    <td>1GB + 2GB Ytb</td>
+    <td>7 Hari</td>
+    <td>17.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PAKET YOUTUBE', '35', '1GB + 2GB Ytb', '7 Hari', '17.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+
+
+  <script>
+    // Function to toggle accordion panels
+    function toggleAccordion(event, panelId) {
+      var panel = document.getElementById(panelId);
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+      event.currentTarget.classList.toggle("active");
+    }
+  </script>
+</body>
+
+</div>
+
+
+
+    <div id="plsa" class="tabcontent">
+
+<body>
+
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'pulsatsel')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">PULSA TELKOMSEL</button>
+
+<div class="panel" id="pulsatsel" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+         <table>
+
+
+
+<tr>
+          <th>No.</th>
+          <th>Provider</th>
+          <th>Pulsa</th>
+          <th>Harga</th>
+          <th>Cek</th>
+        </tr>
+  <tr>
+    <td>1.</td>
+    <td>Telkomsel</td>
+    <td>5.000</td>
+    <td>6.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '1', '0', '0\nNominal: 5.000', '6.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>Telkomsel</td>
+    <td>10.000</td>
+    <td>11.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '2', '0', '0\nNominal: 10.000', '11.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>Telkomsel</td>
+    <td>15.000</td>
+    <td>16.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '3', '0', '0\nNominal: 15.000', '16.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>Telkomsel</td>
+    <td>20.000</td>
+    <td>21.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '4', '0', '0\nNominal: 20.000', '21.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>5.</td>
+    <td>Telkomsel</td>
+    <td>25.000</td>
+    <td>26.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '5', '0', '0\nNominal: 25.000', '26.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>Telkomsel</td>
+    <td>30.000</td>
+    <td>31.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '6', '0', '0\nNominal: 30.000', '31.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>7.</td>
+    <td>Telkomsel</td>
+    <td>35.000</td>
+    <td>36.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '7', '0', '0\nNominal: 35.000', '36.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>8.</td>
+    <td>Telkomsel</td>
+    <td>40.000</td>
+    <td>41.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '8', '0', '0\nNominal: 40.000', '41.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>9.</td>
+    <td>Telkomsel</td>
+    <td>45.000</td>
+    <td>46.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '9', '0', '0\nNominal: 45.000', '46.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>10.</td>
+    <td>Telkomsel</td>
+    <td>50.000</td>
+    <td>51.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '10', '0', '0\nNominal: 50.000', '51.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>11.</td>
+    <td>Telkomsel</td>
+    <td>55.000</td>
+    <td>56.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '11', '0', '0\nNominal: 55.000', '56.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>12.</td>
+    <td>Telkomsel</td>
+    <td>60.000</td>
+    <td>61.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '12', '0', '0\nNominal: 60.000', '61.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>13.</td>
+    <td>Telkomsel</td>
+    <td>65.000</td>
+    <td>66.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '13', '0', '0\nNominal: 65.000', '66.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>14.</td>
+    <td>Telkomsel</td>
+    <td>70.000</td>
+    <td>71.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '14', '0', '0\nNominal: 70.000', '71.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>15.</td>
+    <td>Telkomsel</td>
+    <td>75.000</td>
+    <td>76.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '15', '0', '0\nNominal: 75.000', '76.000')">Beli</a></td>
+  </tr>
+    <tr>
+    <td>16.</td>
+    <td>Telkomsel</td>
+    <td>80.000</td>
+    <td>81.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '16', '0', '0\nNominal: 80.000', '81.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>17.</td>
+    <td>Telkomsel</td>
+    <td>85.000</td>
+    <td>86.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '17', '0', '0\nNominal: 85.000', '86.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>18.</td>
+    <td>Telkomsel</td>
+    <td>90.000</td>
+    <td>91.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '18', '0', '0\nNominal: 90.000', '91.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>19.</td>
+    <td>Telkomsel</td>
+    <td>95.000</td>
+    <td>96.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '19', '0', '0\nNominal: 95.000', '96.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>20.</td>
+    <td>Telkomsel</td>
+    <td>100.000</td>
+    <td>99.000</td>
+    <td><a href="#" class="button" onclick="showModal('TELKOMSEL', 'PULSA', '20', '0', '0\nNominal: 100.000', '99.000')">Beli</a></td>
+  </tr>
+</table>
+
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'pulsaaxis')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">PULSA AXIS</button>
+
+<div class="panel" id="pulsaaxis" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+       <table>
+
+
+
+<tr>
+          <th>No.</th>
+          <th>Provider</th>
+          <th>Pulsa</th>
+          <th>Harga</th>
+          <th>Cek</th>
+        </tr>
+  <tr>
+    <td>1.</td>
+    <td>AXIS</td>
+    <td>5.000</td>
+    <td>6.000</td>
+    <td><a href="#" class="button" onclick="showModal('AXIS', 'PULSA', '1', '0', '0\nNominal: 5.000', '6.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>AXIS</td>
+    <td>10.000</td>
+    <td>11.000</td>
+    <td><a href="#" class="button" onclick="showModal('AXIS', 'PULSA', '2', '0', '0\nNominal: 10.000', '11.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>AXIS</td>
+    <td>15.000</td>
+    <td>16.000</td>
+    <td><a href="#" class="button" onclick="showModal('AXIS', 'PULSA', '3', '0', '0\nNominal: 15.000', '16.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>AXIS</td>
+    <td>25.000</td>
+    <td>26.000</td>
+    <td><a href="#" class="button" onclick="showModal('AXIS', 'PULSA', '4', '0', '0\nNominal: 25.000', '26.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>5.</td>
+    <td>AXIS</td>
+    <td>30.000</td>
+    <td>31.000</td>
+    <td><a href="#" class="button" onclick="showModal('AXIS', 'PULSA', '5', '0', '0\nNominal: 30.000', '31.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>AXIS</td>
+    <td>50.000</td>
+    <td>51.000</td>
+    <td><a href="#" class="button" onclick="showModal('AXIS', 'PULSA', '6', '0', '0\nNominal: 50.000', '51.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>7.</td>
+    <td>AXIS</td>
+    <td>100.000</td>
+    <td>101.000</td>
+    <td><a href="#" class="button" onclick="showModal('AXIS', 'PULSA', '7', '0', '0\nNominal: 100.000', '101.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'pulsaxl')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">PULSA XL</button>
+
+<div class="panel" id="pulsaxl" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+
+
+
+<tr>
+          <th>No.</th>
+          <th>Provider</th>
+          <th>Pulsa</th>
+          <th>Harga</th>
+          <th>Cek</th>
+        </tr>
+  <tr>
+    <td>1.</td>
+    <td>XL</td>
+    <td>5.000</td>
+    <td>6.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PULSA', '1', '0', '0\nNominal: 5.000', '6.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>XL</td>
+    <td>10.000</td>
+    <td>11.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PULSA', '2', '0', '0\nNominal: 10.000', '11.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>XL</td>
+    <td>15.000</td>
+    <td>16.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PULSA', '3', '0', '0\nNominal: 15.000', '16.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>XL</td>
+    <td>25.000</td>
+    <td>26.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PULSA', '4', '0', '0\nNominal: 25.000', '26.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>5.</td>
+    <td>XL</td>
+    <td>30.000</td>
+    <td>31.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PULSA', '5', '0', '0\nNominal: 30.000', '31.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>XL</td>
+    <td>50.000</td>
+    <td>51.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PULSA', '6', '0', '0\nNominal: 50.000', '51.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>7.</td>
+    <td>XL</td>
+    <td>100.000</td>
+    <td>101.000</td>
+    <td><a href="#" class="button" onclick="showModal('XL', 'PULSA', '7', '0', '0\nNominal: 100.000', '101.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'pulsa3')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">PULSA THREE</button>
+
+<div class="panel" id="pulsa3" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+
+
+
+<tr>
+          <th>No.</th>
+          <th>Provider</th>
+          <th>Pulsa</th>
+          <th>Harga</th>
+          <th>Cek</th>
+        </tr>
+  <tr>
+    <td>1.</td>
+    <td>Tri</td>
+    <td>1.000</td>
+    <td>2.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '1', '0', '0\nNominal: 1.000', '2.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>Tri</td>
+    <td>2.000</td>
+    <td>3.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '2', '0', '0\nNominal: 2.000', '3.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>Tri</td>
+    <td>3.000</td>
+    <td>4.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '3', '0', '0\nNominal: 3.000', '4.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>Tri</td>
+    <td>5.000</td>
+    <td>6.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '4', '0', '0\nNominal: 5.000', '6.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>5.</td>
+    <td>Tri</td>
+    <td>8.000</td>
+    <td>9.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '5', '0', '0\nNominal: 8.000', '9.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>Tri</td>
+    <td>10.000</td>
+    <td>11.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '6', '0', '0\nNominal: 10.000', '11.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>7.</td>
+    <td>Tri</td>
+    <td>15.000</td>
+    <td>16.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '7', '0', '0\nNominal: 15.000', '16.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>8.</td>
+    <td>Tri</td>
+    <td>20.000</td>
+    <td>21.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '8', '0', '0\nNominal: 20.000', '21.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>9.</td>
+    <td>Tri</td>
+    <td>25.000</td>
+    <td>26.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '9', '0', '0\nNominal: 25.000', '26.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>10.</td>
+    <td>Tri</td>
+    <td>30.000</td>
+    <td>31.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '10', '0', '0\nNominal: 30.000', '31.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>11.</td>
+    <td>Tri</td>
+    <td>40.000</td>
+    <td>41.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '11', '0', '0\nNominal: 40.000', '41.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>12.</td>
+    <td>Tri</td>
+    <td>50.000</td>
+    <td>51.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '12', '0', '0\nNominal: 50.000', '51.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>13.</td>
+    <td>Tri</td>
+    <td>75.000</td>
+    <td>76.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '13', '0', '0\nNominal: 75.000', '76.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>14.</td>
+    <td>Tri</td>
+    <td>100.000</td>
+    <td>99.000</td>
+    <td><a href="#" class="button" onclick="showModal('TRI', 'PULSA', '14', '0', '0\nNominal: 100.000', '99.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'pulsaindosat')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">PULSA INDOSAT</button>
+
+<div class="panel" id="pulsaindosat" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+      <table>
+
+
+<tr>
+          <th>No.</th>
+          <th>Provider</th>
+          <th>Pulsa</th>
+          <th>Harga</th>
+          <th>Cek</th>
+        </tr>
+  <tr>
+    <td>1.</td>
+    <td>Indosat</td>
+    <td>5.000</td>
+    <td>6.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '1', '0', '0\nNominal: 5.000', '6.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>Indosat</td>
+    <td>10.000</td>
+    <td>11.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '2', '0', '0\nNominal: 10.000', '11.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>Indosat</td>
+    <td>12.000</td>
+    <td>13.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '3', '0', '0\nNominal: 12.000', '13.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>Indosat</td>
+    <td>15.000</td>
+    <td>16.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '4', '0', '0\nNominal: 15.000', '16.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>5.</td>
+    <td>Indosat</td>
+    <td>20.000</td>
+    <td>21.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '5', '0', '0\nNominal: 20.000', '21.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>6.</td>
+    <td>Indosat</td>
+    <td>25.000</td>
+    <td>26.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '6', '0', '0\nNominal: 25.000', '26.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>7.</td>
+    <td>Indosat</td>
+    <td>30.000</td>
+    <td>31.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '7', '0', '0\nNominal: 30.000', '31.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>8.</td>
+    <td>Indosat</td>
+    <td>40.000</td>
+    <td>41.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '8', '0', '0\nNominal: 40.000', '41.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>9.</td>
+    <td>Indosat</td>
+    <td>50.000</td>
+    <td>51.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '9', '0', '0\nNominal: 50.000', '51.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>10.</td>
+    <td>Indosat</td>
+    <td>60.000</td>
+    <td>61.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '10', '0', '0\nNominal: 60.000', '61.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>11.</td>
+    <td>Indosat</td>
+    <td>70.000</td>
+    <td>71.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '11', '0', '0\nNominal: 70.000', '71.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>12.</td>
+    <td>Indosat</td>
+    <td>80.000</td>
+    <td>81.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '12', '0', '0\nNominal: 80.000', '81.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>13.</td>
+    <td>Indosat</td>
+    <td>90.000</td>
+    <td>91.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '13', '0', '0\nNominal: 90.000', '91.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>14.</td>
+    <td>Indosat</td>
+    <td>100.000</td>
+    <td>99.000</td>
+    <td><a href="#" class="button" onclick="showModal('INDOSAT', 'PULSA', '14', '0', '0\nNominal: 100.000', '99.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+
+
+  <script>
+    // Function to toggle accordion panels
+    function toggleAccordion(event, panelId) {
+      var panel = document.getElementById(panelId);
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+      event.currentTarget.classList.toggle("active");
+    }
+  </script>
+</body>
+
+</div>
+
+</div>
+
+    <script>
+         function openTab(evt, tabName) {
+            var tabcontent = document.getElementById(tabName);
+            var activeTabs = document.getElementsByClassName("tabcontent");
+            for (var i = 0; i < activeTabs.length; i++) {
+                if (activeTabs[i].style.display === "block" && activeTabs[i] !== tabcontent) {
+                    activeTabs[i].style.display = "none";
+                    var tablinks = document.getElementsByClassName("tablinks");
+                    for (var j = 0; j < tablinks.length; j++) {
+                        tablinks[j].classList.remove("active");
+                    }
+                }
+            }
+
+            if (tabcontent.style.display === "block") {
+                tabcontent.style.display = "none";
+                evt.currentTarget.classList.remove("active");
+            } else {
+                tabcontent.style.display = "block";
+                evt.currentTarget.classList.add("active");
+            }
+        }
+    </script>
+
+
+  </script>
+</body>
+
+
+
+
+<div id="tokenpln" class="tabcontent">
+
+<div class="accordion" style="display: flex; flex-direction: column; align-items: center; padding: 10px;">
+<button class="accordion-btn" onclick="toggleAccordion(event, 'pln')" style="background-color: #69C6BB; color: #FFFFFF; font-family: 'Cambria', serif; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px; margin-bottom: 10px;">TOKEN LISTRIK (PLN)</button>
+
+<div class="panel" id="pln" style="display: none; background-color: #f9f9f9; padding: 10px; border-radius: 10px; width: 99%;">
+
+<table>
+  <tr>
+    <th>No.</th>
+    <th>Jenis</th>
+    <th>Token</th>
+    <th>Harga</th>
+    <th>Cek</th>
+  </tr>
+  <tr>
+    <td>1.</td>
+    <td>Token</td>
+    <td>20.000</td>
+    <td>22.000</td>
+    <td><a href="#" class="button" onclick="showModal('-', 'Token Listrik', '1', '-\nToken: 20.000', '-', '22.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>Token</td>
+    <td>50.000</td>
+    <td>52.000</td>
+    <td><a href="#" class="button" onclick="showModal('-', 'Token Listrik', '2', '-\nToken: 50.000', '-', '52.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>3.</td>
+    <td>Token</td>
+    <td>100.000</td>
+    <td>102.000</td>
+    <td><a href="#" class="button" onclick="showModal('-', 'Token Listrik', '3', '-\nToken: 100.000', '-', '102.000')">Beli</a></td>
+  </tr>
+  <tr>
+    <td>4.</td>
+    <td>Token</td>
+    <td>200.000</td>
+    <td>202.000</td>
+    <td><a href="#" class="button" onclick="showModal('-', 'Token Listrik', '3', '-\nToken: 200.000', '-', '202.000')">Beli</a></td>
+  </tr>
+</table>
+
+    </div>
+  </div>
+
+
+  <script>
+    // Function to toggle accordion panels
+    function toggleAccordion(event, panelId) {
+      var panel = document.getElementById(panelId);
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+      event.currentTarget.classList.toggle("active");
+    }
+  </script>
+</body>
+
+</div>
+
+
+
+
+<!-------------------------BATAS AKHIR MENU------------------------>
+<!-------------------------BATAS AKHIR MENU------------------------>
+<!-------------------------BATAS AKHIR MENU------------------------>
+<!-------------------------BATAS AKHIR MENU------------------------>
+<!-------------------------BATAS AKHIR MENU------------------------>
+<!-------------------------BATAS AKHIR MENU------------------------>
+
+
+<div class="tm-container-outer" id="tm-section-2">
+<h2 class="menu-title">
+        <span class="line"></span>
+        TENTANG
+        <span class="line"></span>
+    </h2>
+
+<section class="tm-slideshow-section">
+                    <div class="tm-slideshow">
+
+<center>
+  <div class="accordion-btn" style="background-color: #FFFFFF; color: #000000; font-family: 'Cambria', serif; text-align: left; padding: 10px 10px; border: none; border-radius: 5px; margin-bottom: 2px;">
+<body>
+    <h5>DM Pulsa!</h5>
+    <p>Penuhi kebutuhan pulsa dan paket data Anda dengan mudah dan cepat.</p>
+
+    <h6>Pilih Menu - Klik Beli - WhatsApp Admin - Selesai!</h6>
+    <p>Nikmati kemudahan berbelanja pulsa dan paket data melalui WhatsApp. Klik "Beli" dan pilih Admin untuk layanan yang sesuai dengan Anda.</p>
+
+    <h6>Kenapa DM Pulsa?</h6>
+    <ul>
+        <li>Menu lengkap, sesuai kebutuhan Anda.</li>
+        <li>Transaksi cepat, tanpa ribet.</li>
+        <li>Tim Customer Service siap membantu.</li>
+    </ul>
+
+    <i><h7>DM Pulsa - Solusi Komunikasi Terpercaya!</h7></i>
+</body>
+</div>
+
+
+
+<div class="tm-container-outer" id="tm-section-3">
+<h2 class="menu-title">
+        <span class="line"></span>
+        ADMIN
+        <span class="line"></span>
+    </h2>
+
+<section class="tm-slideshow-section">
+                    <div class="tm-slideshow">
+
+<center>
+  <div class="accordion-btn" style="background-color: #FFFFFF; color: #000000; font-family: 'Cambria', serif; text-align: left; padding: 10px 10px; border: none; border-radius: 5px; margin-bottom: 2px;">
+<body>
+
+<object data="kontak_admin.html" width="100%" height="145vh"></object> </body>
+</center>
+
+
+
+ 
+
+                </section>
+
+                
+
+
+<div class="tm-container-outer" id="tm-section-4">
+<h2 class="menu-title">
+        <span class="line"></span><span class="line"></span>
+    </h2>
+
+
+
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <!-- Menggunakan elemen <center> untuk membuat konten berada di tengah halaman -->
+    <center>
+        <!-- Menggunakan elemen <div> untuk menampilkan tanggal -->
+        <div>
+            <!-- Menggunakan elemen <p> untuk menampilkan tanggal yang diambil dari JavaScript -->
+            <p id="tanggal"></p>
+        </div>
+
+        <!-- Menggunakan elemen <div> untuk menampilkan jam -->
+        <div>
+            <!-- Menggunakan elemen <p> untuk menampilkan jam yang diambil dari JavaScript -->
+            <p id="jam"></p>
+        </div>
+    </center>
+
+    <!-- Script JavaScript untuk mengambil dan menampilkan tanggal dan waktu -->
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+
+            const tanggal = now.getDate();
+            const bulan = [
+                "Januari", "Februari", "Maret", "April", "Mei", "Juni", 
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ][now.getMonth()];
+            const tahun = now.getFullYear();
+
+            const jam = now.getHours();
+            const menit = now.getMinutes();
+            const detik = now.getSeconds();
+
+            // Menampilkan tanggal dengan format "tanggal-bulan-tahun"
+            document.getElementById('tanggal').innerText = `${tanggal}-${bulan}-${tahun}`;
+
+            // Menampilkan jam dengan format "jam:menit:detik"
+            document.getElementById('jam').innerText = `${jam.toString().padStart(2, '0')}:${menit.toString().padStart(2, '0')}:${detik.toString().padStart(2, '0')}`;
+        }
+
+        // Mengupdate tanggal dan waktu setiap detik
+        setInterval(updateDateTime, 1000);
+
+        // Pertama kali load halaman, panggil fungsi untuk menampilkan tanggal dan waktu
+        updateDateTime();
+    </script>
+
+
+
+
+
+
+
+            </div>     </div></div></div></center>
+
+
+
+
+
+
+
+<!------------------------------Kalangan bawah-------------------------->
+<!------------------------------Kalangan bawah-------------------------->
+<!------------------------------Kalangan bawah-------------------------->
+<!------------------------------Kalangan bawah-------------------------->
+<!------------------------------Kalangan bawah-------------------------->
+<!------------------------------Kalangan bawah-------------------------->
+<p>
+<p>
+<footer class="tm-container-outer">
+                <p class="mb-0">Hak cipta © <span class="tm-current-year">2023</span>  
+                    
+                 Designed oleh <a rel="nofollow" href="http://dlom1.github.io/dmpulsa/" target="_parent">DM Pulsa</a></p>
+            </footer>
+        </div>
+    </div> <!-- .main-content -->
+
+    <!-- load JS files -->
+    <script src="js/jquery-1.11.3.min.js"></script>             <!-- jQuery (https://jquery.com/download/) -->
+    <script src="js/popper.min.js"></script>                    <!-- https://popper.js.org/ -->       
+    <script src="js/bootstrap.min.js"></script>                 <!-- https://getbootstrap.com/ -->
+    <script src="js/datepicker.min.js"></script>                <!-- https://github.com/qodesmith/datepicker -->
+    <script src="js/jquery.singlePageNav.min.js"></script>      <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
+    <script src="slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->
+    <script src="js/jquery.scrollTo.min.js"></script>           <!-- https://github.com/flesler/jquery.scrollTo -->
+    
+
+
+
+  
+
+<!------------------- Modal untuk pilihan admin -------------------->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h4>Silahkan pilih Admin</h4>
+
+    <div class="admin-grid">
+      <div class="admin-info">
+        <img src="foto_admin1.jpg" alt="Admin 1">
+        <div class="admin-details">
+          <h8>A. Murtadlo</h8><p>
+          <button onclick="openWhatsApp('6283812315522')">Beli dari<p>Admin 1</p></button></p>
+        </div>
+      </div>
+
+      <div class="admin-info">
+        <img src="foto_admin2.jpg" alt="Admin 2">
+        <div class="admin-details">
+          <h8>Nurul Hadi</h8><p>
+          <button onclick="openWhatsApp('62 81318577116')">Beli dari<p>Admin 2</button></p>
+        </div>
+      </div>
+
+      <div class="admin-info">
+        <img src="foto_admin3.jpg" alt="Admin 3">
+        <div class="admin-details">
+          <h8>Iqbalul Marom</h8><p>
+          <button onclick="openWhatsApp('62 83891898047')">Beli dari<p>Admin 3</button></p>
+        </div>
+      </div>
+
+      <div class="admin-info">
+        <img src="foto_admin4.jpg" alt="Admin 4">
+        <div class="admin-details">
+          <h8>Sarif Hidayat</h8><p>
+          <button onclick="openWhatsApp('62 83149190244')">Beli dari<p>Admin 4</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!---------------------------------------------------------------------------------->
+
+
+
+<script>
+
+
+  function showModal(namaKartu, namaPaket, noUrut, kuota, durasi, harga) {
+    var modal = document.getElementById("modal");
+    modal.style.display = "block";
+    modal.setAttribute("data-namakartu", namaKartu);
+    modal.setAttribute("data-namapaket", namaPaket);
+    modal.setAttribute("data-nourut", noUrut);
+    modal.setAttribute("data-kuota", kuota);
+    modal.setAttribute("data-durasi", durasi);
+    modal.setAttribute("data-harga", harga);
+  }
+
+  function openModal() {
+  var modal = document.getElementById("modal");
+  modal.style.display = "block";
+}
+
+function closeModal() {
+  var modal = document.getElementById("modal");
+  modal.style.display = "none";
+}
+
+  function openWhatsApp(nomorTujuan) {
+    var modal = document.getElementById("modal");
+    var namaKartu = modal.getAttribute("data-namakartu");
+    var namaPaket = modal.getAttribute("data-namapaket");
+    var noUrut = modal.getAttribute("data-nourut");
+    var kuota = modal.getAttribute("data-kuota");
+    var durasi = modal.getAttribute("data-durasi");
+    var harga = modal.getAttribute("data-harga");
+
+    var pesan = "Mang! Order Kuota/Pulsa\n" +
+                "Kartu: " + namaKartu + "\n" +
+                "Jenis: " + namaPaket + "\n" +
+                "Kode Urut: " + noUrut + "\n" +
+                "Kuota: " + kuota + "\n" +
+                "Durasi: " + durasi + "\n" +
+                "Harga: Rp " + harga;
+
+    var encodedMessage = encodeURIComponent(pesan);
+    var whatsappUrl = "https://api.whatsapp.com/send?phone=" + nomorTujuan + "&text=" + encodedMessage;
+
+    window.open(whatsappUrl, "_blank");
+    modal.style.display = "none";
+  }
+        // Fungsi untuk mengatur jumlah kunjungan dalam Local Storage
+        function setVisitCount(count) {
+            localStorage.setItem('visitCount', count);
+        }
+
+        // Fungsi untuk mendapatkan jumlah kunjungan dari Local Storage
+        function getVisitCount() {
+            return parseInt(localStorage.getItem('visitCount')) || 0;
+        }
+
+        // Mendapatkan jumlah kunjungan saat halaman dimuat
+        var currentCount = getVisitCount();
+
+        // Menampilkan jumlah kunjungan pada elemen dengan id "visitCount"
+        document.getElementById('visitCount').textContent = currentCount;
+
+        // Menambahkan 1 kunjungan setiap kali halaman dimuat
+        currentCount++;
+        setVisitCount(currentCount);
+
+
+
+
+
+
+        /* DOM is ready
+        ------------------------------------------------*/
+        $(function(){
+
+            // Change top navbar on scroll
+            $(window).on("scroll", function() {
+                if($(window).scrollTop() > 100) {
+                    $(".tm-top-bar").addClass("active");
+                } else {                    
+                 $(".tm-top-bar").removeClass("active");
+                }
+            });
+
+            // Smooth scroll to search form
+            $('.tm-down-arrow-link').click(function(){
+                $.scrollTo('#tm-section-search', 300, {easing:'linear'});
+            });
+
+            // Date Picker in Search form
+            var pickerCheckIn = datepicker('#inputCheckIn');
+            var pickerCheckOut = datepicker('#inputCheckOut');
+
+            // Update nav links on scroll
+            $('#tm-top-bar').singlePageNav({
+                currentClass:'active',
+                offset: 60
+            });
+
+            // Close navbar after clicked
+            $('.nav-link').click(function(){
+                $('#mainNav').removeClass('show');
+            });
+
+            // Slick Carousel
+            $('.tm-slideshow').slick({
+                infinite: true,
+                arrows: true,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            });
+
+            loadGoogleMap();                                       // Google Map                
+            $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright           
+        });
+
+    </script>             
+
+</body>
+</html>
